@@ -1,0 +1,41 @@
+######################
+### What is it ??? ###
+######################
+
+fanspeed.sh is a script that manage QNAP TS-X09 internal fan speed related to temperatures thresolds. It's designed to be run in a Debian system, but should be capable of running on any Linux based OS.
+It's fully GPL, so you can do whatever you want with, but it will keep GPL for ever.
+
+#####################################
+### What are the pre-requisites ? ###
+#####################################
+
+You have to run qcontrol daemon (provided by qcontrol Debian package)
+You also need hddtemp and awk commands, easily available in Debian :
+
+###########################
+### How does it works ? ###
+###########################
+
+The script checks for HDD temperatures, then, according to the collected values, it will set fan speed regarding the defined thresolds.
+All values are on Celsius/Centigrade scale. If the temperature is under the "STOP_TEMP" value, the fan speed is set to "stop", if it's between "STOP_TEMP" and "SILENCE_TEMP", it'll be set to "silence" etc...
+
+The disks list define the disks we will check temperatures of, defaults are :
+DISKS="/dev/sda /dev/sdb"
+
+Default temperatures thresolds (can be change in fanspeed.sh) :
+
+STOP_TEMP=30
+SILENCE_TEMP=35
+LOW_TEMP=40
+MEDIUM_TEMP=45
+HIGH_TEMP=50
+FULL_TEMP=55
+
+#########################################################
+### How could I check temperature/fan speed changes ? ###
+#########################################################
+
+A very primary log system is included. You can enable it (default) in setting :
+LOG=1                   
+Also, you can define log file, the default is set to :
+LOGFILE=/var/log/fanspeed.log
